@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.luischen.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="cn.luischen.model.Book" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="src" property="src" jdbcType="VARCHAR" />
+    <result column="store" property="store" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, price, title, comment,src,store
+  </sql>
+  <insert id="insert" parameterType="cn.luischen.model.Book" >
+    insert into t_book (id, price, title, 
+      comment,src,store)
+    values (#{id,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{title,jdbcType=VARCHAR},
+      #{comment,jdbcType=VARCHAR},#{src,jdbcType=VARCHAR},#{store,jdbcType=VARCHAR})
+  </insert>
+  <select id="getBookById" resultType="cn.luischen.model.Book">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    t_book
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findBookByLikeTitle" resultType="cn.luischen.model.Book">
+    <bind name="titleLike" value="'%' + title + '%'" />
+  SELECT 
+    <include refid="Base_Column_List"/>
+    FROM
+    t_book
+    WHERE    title like #{titleLike}
+  </select>
+</mapper>

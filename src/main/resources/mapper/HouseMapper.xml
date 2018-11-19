@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.luischen.dao.HouseMapper" >
+  <resultMap id="BaseResultMap" type="cn.luischen.model.House" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="houseType" property="housetype" jdbcType="VARCHAR" />
+    <result column="blockType" property="blocktype" jdbcType="VARCHAR" />
+    <result column="blockAge" property="blockage" jdbcType="VARCHAR" />
+    <result column="FAR" property="far" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="VARCHAR" />
+    <result column="pManage" property="pmanage" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, price, houseType, blockType, blockAge, FAR, fee, pManage, company, imgUrl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_house
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_house
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.luischen.model.House" >
+    insert into t_house (uid, price, houseType, 
+      blockType, blockAge, FAR, 
+      fee, pManage, company, 
+      imgUrl)
+    values (#{uid,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{housetype,jdbcType=VARCHAR}, 
+      #{blocktype,jdbcType=VARCHAR}, #{blockage,jdbcType=VARCHAR}, #{far,jdbcType=VARCHAR}, 
+      #{fee,jdbcType=VARCHAR}, #{pmanage,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.luischen.model.House" >
+    insert into t_house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="housetype != null" >
+        houseType,
+      </if>
+      <if test="blocktype != null" >
+        blockType,
+      </if>
+      <if test="blockage != null" >
+        blockAge,
+      </if>
+      <if test="far != null" >
+        FAR,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="pmanage != null" >
+        pManage,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null" >
+        #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="blocktype != null" >
+        #{blocktype,jdbcType=VARCHAR},
+      </if>
+      <if test="blockage != null" >
+        #{blockage,jdbcType=VARCHAR},
+      </if>
+      <if test="far != null" >
+        #{far,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=VARCHAR},
+      </if>
+      <if test="pmanage != null" >
+        #{pmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.luischen.model.House" >
+    update t_house
+    <set >
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null" >
+        houseType = #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="blocktype != null" >
+        blockType = #{blocktype,jdbcType=VARCHAR},
+      </if>
+      <if test="blockage != null" >
+        blockAge = #{blockage,jdbcType=VARCHAR},
+      </if>
+      <if test="far != null" >
+        FAR = #{far,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=VARCHAR},
+      </if>
+      <if test="pmanage != null" >
+        pManage = #{pmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.luischen.model.House" >
+    update t_house
+    set price = #{price,jdbcType=VARCHAR},
+      houseType = #{housetype,jdbcType=VARCHAR},
+      blockType = #{blocktype,jdbcType=VARCHAR},
+      blockAge = #{blockage,jdbcType=VARCHAR},
+      FAR = #{far,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=VARCHAR},
+      pManage = #{pmanage,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>
